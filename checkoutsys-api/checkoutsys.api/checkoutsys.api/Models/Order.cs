@@ -17,5 +17,5 @@ public partial class Order
 
     public virtual ICollection<OrderProducts> OrdersProducts { get; } = new List<OrderProducts>();
 
-    public virtual ICollection<Transaction> Transactions { get; } = new List<Transaction>();
+    public virtual Transaction? Transaction { get; set; }
 }

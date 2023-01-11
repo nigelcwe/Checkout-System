@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "checkoutsys.api", "checkoutsys.api\checkoutsys.api.csproj", "{B7F365E9-90E9-4574-ADB4-64BD335B0964}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "checkoutsys.api", "checkoutsys.api\checkoutsys.api.csproj", "{9647284A-D538-4C7B-ADF9-2BF4F390FB80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B7F365E9-90E9-4574-ADB4-64BD335B0964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7F365E9-90E9-4574-ADB4-64BD335B0964}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7F365E9-90E9-4574-ADB4-64BD335B0964}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7F365E9-90E9-4574-ADB4-64BD335B0964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9647284A-D538-4C7B-ADF9-2BF4F390FB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9647284A-D538-4C7B-ADF9-2BF4F390FB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9647284A-D538-4C7B-ADF9-2BF4F390FB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9647284A-D538-4C7B-ADF9-2BF4F390FB80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1B5DACC3-1555-4CC0-A3F8-F5AECA237EDF}
+		SolutionGuid = {4F29D0D5-03CB-4113-A4B3-F70F4E6F76E2}
 	EndGlobalSection
 EndGlobal
