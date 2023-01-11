@@ -9,5 +9,5 @@ export class Product {
     price?: number;
     stock?: number;
     admin?: User;
-    orderProducts?: OrderProducts[];
+    orderProducts: OrderProducts[] = [];
 }

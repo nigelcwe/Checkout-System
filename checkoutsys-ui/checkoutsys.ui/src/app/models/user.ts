@@ -9,7 +9,7 @@ export class User {
     email = "";
     password = "";
     role = "";
-    orders?: Order[];
-    products?: Product[];
-    transactions?: Transaction[];
+    orders: Order[] = [];
+    products: Product[] = [];
+    transactions: Transaction[] = [];
 }

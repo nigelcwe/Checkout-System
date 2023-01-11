@@ -8,6 +8,6 @@ export class Order {
     dateTime?: Date;
     isCompleted = "";
     user?: User;
-    orderProducts?: OrderProducts[];
+    orderProducts: OrderProducts[] = [];
     transaction?: Transaction;
 }
