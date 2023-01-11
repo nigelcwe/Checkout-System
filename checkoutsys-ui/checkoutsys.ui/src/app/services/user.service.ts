@@ -16,5 +16,7 @@ export class UserService {
     user.email = "johndoe@gmail.com";
     user.password = "johndoe123";
     user.role = "admin";
+
+    return [user];
   }
 }
