@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Checkout System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <button *ngIf="!user || user == null" class="btn btn-dark" routerLink="login">Login</button>
+            <button *ngIf="!user || user == null" class="btn btn-dark" type="submit">Register</button>
+            <button *ngIf="user?.role == 'customer'" class="btn btn-dark" type="submit">Cart</button>
+            <button *ngIf="user" class="btn btn-dark" type="submit">Logout</button>
+        </div>
+      </div>
+    </div>
+</nav>

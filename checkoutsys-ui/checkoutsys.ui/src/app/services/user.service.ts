@@ -8,11 +8,15 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-  private url = "User";
+  private url = "Users";
 
   constructor(private http: HttpClient) { }
 
   public getUsers() : Observable<User[]> {
     return this.http.get<User[]>( environment.apiUrl + "/" + this.url)
+  }
+
+  public getUser(id: Number) : Observable<User> {
+    return this.http.get<User>( environment.apiUrl + "/" + this.url + "/byId/" + id)
   }
 }

@@ -9,6 +9,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
   title = 'checkoutsys.ui';
+  user?: User;
   users: User[] = [];
 
   constructor(private userService: UserService) {}
