@@ -1,22 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private url = "User";
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public getUsers() : User[] {
-    let user = new User();
-    user.id = 1;
-    user.name = "John Doe";
-    user.username = "johndoe";
-    user.email = "johndoe@gmail.com";
-    user.password = "johndoe123";
-    user.role = "admin";
-
-    return [user];
+  public getUsers() : Observable<User[]> {
+    return this.http.get<User[]>( environment.apiUrl + "/" + this.url)
   }
 }

@@ -14,7 +14,8 @@ export class AppComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit() : void {
-    this.users = this.userService.getUsers();
-    console.log(this.users);
+    this.userService
+    .getUsers()
+    .subscribe((result: User[]) => (this.users = result));
   }
 }
