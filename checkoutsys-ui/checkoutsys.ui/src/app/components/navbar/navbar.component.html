@@ -6,10 +6,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <button *ngIf="!user || user == null" class="btn btn-dark" routerLink="login">Login</button>
-            <button *ngIf="!user || user == null" class="btn btn-dark" type="submit">Register</button>
-            <button *ngIf="user?.role == 'customer'" class="btn btn-dark" type="submit">Cart</button>
-            <button *ngIf="user" class="btn btn-dark" type="submit">Logout</button>
+            <button *ngIf="currUser.id == 0" class="btn btn-dark" routerLink="login">Login</button>
+            <button *ngIf="currUser.id == 0" class="btn btn-dark" routerLink="register">Register</button>
+            <button *ngIf="currUser?.role == 'customer'" class="btn btn-dark" routerLink="cart">Cart</button>
+            <button *ngIf="currUser?.role == 'admin'" class="btn btn-dark" routerLink="addProduct">Add Product</button>
+            <button *ngIf="currUser.id != 0" class="btn btn-dark" id="logout" (click)="logout()">Logout</button>
         </div>
       </div>
     </div>

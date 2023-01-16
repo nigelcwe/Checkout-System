@@ -1,5 +1,5 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,14 +8,30 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-table.component.css']
 })
 export class UserTableComponent implements OnInit {
-  users: User[] = [];
+  private subscription: Subscription = new Subscription();
+  userLst: any;
+  interval: any;
 
   constructor(private userService: UserService) {}
 
   ngOnInit() : void {
-    this.userService
-    .getUsers()
-    .subscribe((result: User[]) => (this.users = result));
+    this.refreshUsers();
+    // this.interval = setInterval(() => {
+    //   this.refreshUsers();
+    // }, 5000);
+  }
+
+  ngOnDestroy() : void {
+    this.subscription.unsubscribe();
+  }
+
+  refreshUsers() {
+    this.subscription.add(
+      this.userService.getUsers()
+      .subscribe(users => {
+        this.userLst = users;
+      })
+    )
   }
 
 }

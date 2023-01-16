@@ -1,7 +1,6 @@
-<app-navbar [user]="user"></app-navbar>
-<app-user-table></app-user-table>
-<app-home *ngIf="!user || user == null"></app-home>
-<app-admin></app-admin>
-<app-customer></app-customer>
+<app-navbar data-bs-theme="dark"></app-navbar>
+<app-home data-bs-theme="dark" *ngIf="currUser.id == 0 || currUser == null"></app-home>
+<app-admin data-bs-theme="dark" *ngIf="currUser.id != 0 && currUser.role == 'admin'"></app-admin>
+<app-customer data-bs-theme="dark" *ngIf="currUser.id != 0 && currUser.role == 'customer'"></app-customer>
 
 <router-outlet></router-outlet>

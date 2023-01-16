@@ -3,7 +3,7 @@ import { Product } from "./product";
 import { Transaction } from "./transaction";
 
 export class User {
-    id?: number;
+    id: Number = 0;
     name = "";
     username = "";
     email = "";

@@ -1,0 +1,62 @@
+<div class="modal" id="stockModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="stockModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="stockModalLabel">Edit Stock</h1>
+          <button id="sockModalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" routerLink=""></button>
+        </div>
+        <div class="modal-body">
+        
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="loading"  class="btn btn-primary" (click)="onSubmit()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Login
+          </button>
+          <a routerLink="../register" class="btn btn-link" data-bs-dismiss="modal">Register</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal" id="detailsModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detailsModalLabel">Edit Details</h1>
+          <button id="detailsModalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" routerLink=""></button>
+        </div>
+        <div class="modal-body">
+        
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="loading"  class="btn btn-primary" (click)="onSubmit()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Login
+          </button>
+          <a routerLink="../register" class="btn btn-link" data-bs-dismiss="modal">Register</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
+          <button id="addModalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" routerLink=""></button>
+        </div>
+        <div class="modal-body">
+        
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="loading"  class="btn btn-primary" (click)="onSubmit()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Login
+          </button>
+          <a routerLink="../register" class="btn btn-link" data-bs-dismiss="modal">Register</a>
+        </div>
+      </div>
+    </div>
+</div>

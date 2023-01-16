@@ -1,0 +1,31 @@
+<table>
+    <thead>
+      <th>Id</th>
+      <th>Admin Id</th>
+      <th>Name</th>
+      <th>Details</th>
+      <th>Price</th>
+      <th>Stock</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productLst">
+        <td>{{ product.id }}</td>
+        <td>{{ product.adminId }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.details }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Edit
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Edit Stock</a></li>
+              <li><a class="dropdown-item" href="#">Edit Details</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>

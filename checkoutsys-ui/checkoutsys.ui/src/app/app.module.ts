@@ -1,7 +1,8 @@
+import { ErrorService } from './services/error.service';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,8 +14,9 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
+import { ProductTableComponent } from './components/product-table/product-table.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { LoginComponent } from './components/login/login.component';
     CustomerComponent,
     RegistrationComponent,
     LoginComponent,
+    ProductTableComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,16 +39,31 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       {
-        path: '',
-        component: HomeComponent
-      },
-      {
         path: 'login',
         component: LoginComponent
       },
+      {
+        path: 'register',
+        component: RegistrationComponent
+      },
+      {
+        path: 'AdminHome',
+        component: AdminComponent
+      },
+      {
+        path: 'CustomerHome',
+        component: CustomerComponent
+      },
+
     ])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
