@@ -9,7 +9,6 @@
             <button *ngIf="currUser.id == 0" class="btn btn-dark" routerLink="login">Login</button>
             <button *ngIf="currUser.id == 0" class="btn btn-dark" routerLink="register">Register</button>
             <button *ngIf="currUser?.role == 'customer'" class="btn btn-dark" routerLink="cart">Cart</button>
-            <button *ngIf="currUser?.role == 'admin'" class="btn btn-dark" (click)="addProduct()">Add Product</button>
             <button *ngIf="currUser.id != 0" class="btn btn-dark" id="logout" (click)="logout()">Logout</button>
         </div>
       </div>

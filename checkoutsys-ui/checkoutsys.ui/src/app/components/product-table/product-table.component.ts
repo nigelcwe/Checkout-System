@@ -79,4 +79,13 @@ export class ProductTableComponent implements OnInit {
     )
     this.router.navigateByUrl("/edit-product"); 
   }
+
+  addProduct() {
+    this.adminService.updateCurrAdd(true);
+    this.adminService.currAdd$.subscribe(data => {
+      console.log(data);
+    }
+    )
+    this.router.navigateByUrl("/edit-product"); 
+  }
 }
