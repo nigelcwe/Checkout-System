@@ -1,4 +1,3 @@
-import { Product } from './models/product';
 import { Component } from '@angular/core';
 import { User } from './models/user';
 import { UserService } from './services/user.service';
@@ -23,14 +22,11 @@ export class AppComponent {
     ) {}
 
   ngOnInit() : void {
-    this.subscription = this.userService.currUser$.subscribe(user => this.currUser = user)
-    // this.userService.getUser(3).subscribe(user => {
+    // this.userService.getUser(1).subscribe(user => {
     //   this.currUser = user;
     // })
-    // if (this.currUser.role == "admin")
-    //   this.router.navigateByUrl("/AdminHome")
-    // else if (this.currUser.role == "customer")
-    //   this.router.navigateByUrl("/CustomerHome");
+    // this.userService.updateCurrUser(this.currUser);
+    this.subscription = this.userService.currUser$.subscribe(user => this.currUser = user)
   }
 
   ngOnDestroy() : void {
