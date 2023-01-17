@@ -15,7 +15,7 @@ public partial class Product
 
     public decimal Price { get; set; }
 
-    public int Stock { get; set; }
+    public long Stock { get; set; }
 
     public virtual User Admin { get; set; } = null!;
 

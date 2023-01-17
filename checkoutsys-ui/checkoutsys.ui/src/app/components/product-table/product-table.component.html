@@ -17,15 +17,15 @@
         <td>{{ product.stock }}</td>
         <td>
           <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button #dropdownBtn class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="getRowIndex(dropdownBtn)">
               Edit
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Edit Stock</a></li>
-              <li><a class="dropdown-item" href="#">Edit Details</a></li>
+              <li><a class="dropdown-item" (click)="editStock()">Edit Stock</a></li>
+              <li><a class="dropdown-item" (click)="editDetails()">Edit Details</a></li>
             </ul>
           </div>
         </td>
       </tr>
     </tbody>
-  </table>
+</table>

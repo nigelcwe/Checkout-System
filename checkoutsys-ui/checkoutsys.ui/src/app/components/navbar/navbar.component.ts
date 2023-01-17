@@ -47,21 +47,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('');
   }
 
-  editStock() {
-    this.currStock = true;
-    this.adminService.updateCurrStock(this.currStock);
-    // TODO: add redirection
-  }
-
-  editDetails() {
-    this.currDetails = true;
-    this.adminService.updateCurrDetails(this.currDetails);
-    // TODO: add redirection
-  }
-
   addProduct() {
-    this.currAdd = true;
-    this.adminService.updateCurrAdd(this.currAdd);
-    // TODO: add redirection
+    this.adminService.updateCurrAdd(true);
+    this.adminService.currAdd$.subscribe(data => {
+      console.log(data);
+    }
+    )
+    this.router.navigateByUrl("/edit-product"); 
   }
 }

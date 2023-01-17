@@ -18,9 +18,42 @@ export class ProductService {
       )
   }
 
-  public getProductsByAdminId(id: Number) : Observable<Product[]> {
+  public getProductsByAdminId(id: number) : Observable<Product[]> {
     return this.http.get<Product[]> (
       `${environment.apiUrl}/${this.url}/byUserId/${id}`
+    )
+  }
+
+  public putProductStock(id: number, stock: number) : Observable<Product> {
+    var params = {'id': id, 'stock': stock};
+    return this.http.put<Product> (
+      `${environment.apiUrl}/${this.url}/PutStock/${id}`, params
+    )
+  }
+
+  public putProduct(id: number, name: string, details: string, price: number, stock: number) : Observable<Product> {
+    var params = {
+      'id': id,
+      'name': name,
+      'details': details,
+      'price': price,
+      'stock': stock
+    }
+    return this.http.put<Product> (
+      `${environment.apiUrl}/${this.url}/${id}`, params
+    )
+  }
+
+  public postProduct(adminId: number, name: string, details: string, price: number, stock: number) : Observable<Product> {
+    var params = {
+      'adminId': adminId,
+      'name': name,
+      'details': details,
+      'price': price,
+      'stock': stock
+    }
+    return this.http.post<Product> (
+      `${environment.apiUrl}/${this.url}`, params
     )
   }
  }

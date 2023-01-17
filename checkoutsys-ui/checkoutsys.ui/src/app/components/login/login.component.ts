@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
 
   ) { }
 
-    form: FormGroup = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl('')
-    })
+  form: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  })
 
   ngOnInit(): void {
     this.subscription = this.userService.currUser$.subscribe(user => 

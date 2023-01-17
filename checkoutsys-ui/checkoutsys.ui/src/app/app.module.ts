@@ -54,6 +54,10 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
         path: 'CustomerHome',
         component: CustomerComponent
       },
+      {
+        path: 'edit-product',
+        component: EditProductComponent
+      },
 
     ])
   ],

@@ -54,7 +54,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe;
+    this.subscription.unsubscribe();
   }
 
   get f() { return this.form.controls; }

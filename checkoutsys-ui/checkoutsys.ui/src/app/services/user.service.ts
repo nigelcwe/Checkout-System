@@ -22,13 +22,13 @@ export class UserService {
       )
   }
 
-  public getUser(id: Number) : Observable<User> {
+  public getUser(id: number) : Observable<User> {
     return this.http.get<User>( 
       `${environment.apiUrl}/${this.url}/byId/${id}`
       )
   }
 
-  public login(username: String, password: String) : Observable<User> {
+  public login(username: string, password: string) : Observable<User> {
     var params = {'username' : username, 'password': password};
     return this.http.post<User>(
       `${environment.apiUrl}/${this.url}/login`, params
@@ -39,7 +39,7 @@ export class UserService {
     this.updateCurrUser(new User());
   }
 
-  public register(fullName: String, username: String, email: String, password: String) : Observable<User> {
+  public register(fullName: string, username: string, email: string, password: string) : Observable<User> {
     var params = {'name' : fullName, 'username': username, 'email': email, 'password': password};
     return this.http.post<User>(
       `${environment.apiUrl}/${this.url}/register`, params

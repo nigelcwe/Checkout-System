@@ -1,8 +1,8 @@
-<div class="modal" id="registrationModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="false">
+<div class="modal" id="registrationModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="registrationModalLabel" aria-hidden="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+        <h1 class="modal-title fs-5" id="registrationModalLabel">Register</h1>
         <button id="registrationModalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" routerLink=""></button>
       </div>
       <div class="modal-body">
@@ -23,7 +23,7 @@
           </div>
           <div class="mb-3">
               <label class="form-label">Email</label>
-              <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+              <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
               <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
                   <div *ngIf="f['email'].errors['email']">Email is required</div>
               </div>

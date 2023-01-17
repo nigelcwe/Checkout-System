@@ -92,7 +92,7 @@ namespace checkoutsys.api.Controllers
         // PUT: api/Products/PutStock/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("PutStock/{id}")]
-        public async Task<IActionResult> PutProductStock(long id, int stock)
+        public async Task<IActionResult> PutProductStock(long id, long stock)
         {
             var product = await _context.Products.FindAsync(id);
 
