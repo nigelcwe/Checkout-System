@@ -97,22 +97,22 @@ export class EditProductComponent implements OnInit {
       name: [{value: this.currProduct.name, disabled: true}],
       details: [{value: this.currProduct.details, disabled: true}],
       price: [{value: this.currProduct.price, disabled: true}],
-      stock: [this.currProduct.stock, Validators.required],
+      stock: [this.currProduct.stock, [Validators.required, Validators.min(0)]],
     })
 
     this.detailsForm = this.formBuilder.group({
       id: [{value: this.currProduct.id, disabled: true}],
-      name: [this.currProduct.name, Validators.required],
-      details: [this.currProduct.details, Validators.required],
-      price: [this.currProduct.price, Validators.required],
-      stock: [this.currProduct.stock, Validators.required],
+      name: [this.currProduct.name, [Validators.required, Validators.maxLength(50)]],
+      details: [this.currProduct.details, [Validators.required, Validators.maxLength(200)]],
+      price: [this.currProduct.price, [Validators.required, Validators.min(1)]],
+      stock: [this.currProduct.stock, [Validators.required, Validators.min(0)]],
     })
 
     this.addForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      details: ['', Validators.required],
-      price: ['', Validators.required],
-      stock: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
+      details: ['', [Validators.required, Validators.maxLength(200)]],
+      price: ['', [Validators.required, Validators.min(1)]],
+      stock: ['', [Validators.required, Validators.min(0)]],
     })
 
     this.formModal.show();

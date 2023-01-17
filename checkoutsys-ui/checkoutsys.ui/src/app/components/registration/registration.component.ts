@@ -44,9 +44,9 @@ export class RegistrationComponent implements OnInit {
     
     this.form = this.formBuilder.group({
       fullName: ['', Validators.required],
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      username: ['', [Validators.required, Validators.pattern("^[a-zA-Z0-9_]*$"), Validators.maxLength(20), Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
     })
 
     this.formModal.show();

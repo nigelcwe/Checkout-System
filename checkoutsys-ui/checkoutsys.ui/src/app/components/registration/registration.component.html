@@ -19,13 +19,18 @@
               <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
               <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                   <div *ngIf="f['username'].errors['required']">Username is required</div>
+                  <div *ngIf="f['username'].errors['pattern']">Invalid characters detected</div>
+                  <div *ngIf="f['username'].errors['minlength']">Username must be at least 4 characters</div>
+                  <div *ngIf="f['username'].errors['maxlength']">Username cannot be over 20 characters</div>
               </div>
           </div>
           <div class="mb-3">
               <label class="form-label">Email</label>
               <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
               <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                  <div *ngIf="f['email'].errors['email']">Email is required</div>
+                  <div *ngIf="f['email'].errors['required']">Email is required</div>
+                  <div *ngIf="f['email'].errors['email']">Invalid email</div>
+
               </div>
           </div>
           <div class="mb-3">

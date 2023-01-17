@@ -14,29 +14,21 @@
             <div class="mb-3">
               <label class="form-label">Product Name</label>
               <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && s['name'].errors }"/>
-              <div *ngIf="submitted && s['name'].errors" class="invalid-feedback">
-                  <div *ngIf="s['name'].errors['required']">Product name is required</div>
-              </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Product Details</label>
               <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && s['details'].errors }"/>
-              <div *ngIf="submitted && s['details'].errors" class="invalid-feedback">
-                  <div *ngIf="s['details'].errors['details']">Product detail is required</div>
-              </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && s['price'].errors }" min="1"/>
-                <div *ngIf="submitted && s['price'].errors" class="invalid-feedback">
-                    <div *ngIf="s['price'].errors['required']">Price is required</div>
-                </div>
+                <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && s['price'].errors }"/>
             </div>
             <div class="mb-3">
                 <label class="form-label">Stock</label>
-                <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && s['stock'].errors }" min="0"/>
+                <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && s['stock'].errors }"/>
                 <div *ngIf="submitted && s['stock'].errors" class="invalid-feedback">
                     <div *ngIf="s['stock'].errors['required']">Stock is required</div>
+                    <div *ngIf="s['stock'].errors['min']">Stock cannot be negative</div>
                 </div>
             </div>
           </form>
@@ -69,27 +61,31 @@
               <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && d['name'].errors }"/>
               <div *ngIf="submitted && d['name'].errors" class="invalid-feedback">
                   <div *ngIf="d['name'].errors['required']">Product name is required</div>
+                  <div *ngIf="d['name'].errors['maxlength']">Product name is too long</div>
               </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Product Details</label>
               <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && d['details'].errors }"/>
               <div *ngIf="submitted && d['details'].errors" class="invalid-feedback">
-                  <div *ngIf="d['details'].errors['details']">Product detail is required</div>
+                  <div *ngIf="d['details'].errors['required']">Product detail is required</div>
+                  <div *ngIf="d['details'].errors['maxlength']">Product detail is too long</div>
               </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && d['price'].errors }" min="1"/>
+                <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && d['price'].errors }"/>
                 <div *ngIf="submitted && d['price'].errors" class="invalid-feedback">
                     <div *ngIf="d['price'].errors['required']">Price is required</div>
+                    <div *ngIf="d['price'].errors['min']">Price cannot be less than 1</div>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Stock</label>
-                <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && d['stock'].errors }" min="0"/>
+                <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && d['stock'].errors }"/>
                 <div *ngIf="submitted && d['stock'].errors" class="invalid-feedback">
                     <div *ngIf="d['stock'].errors['required']">Stock is required</div>
+                    <div *ngIf="d['stock'].errors['min']">Stock cannot be negative</div>
                 </div>
             </div>
           </form>
@@ -118,27 +114,32 @@
               <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && a['name'].errors }"/>
               <div *ngIf="submitted && a['name'].errors" class="invalid-feedback">
                   <div *ngIf="a['name'].errors['required']">Product name is required</div>
+                  <div *ngIf="a['name'].errors['maxlength']">Product name is too long</div>
               </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Product Details</label>
               <input type="text" formControlName="details" class="form-control" [ngClass]="{ 'is-invalid': submitted && a['details'].errors }"/>
               <div *ngIf="submitted && a['details'].errors" class="invalid-feedback">
-                  <div *ngIf="a['details'].errors['details']">Product detail is required</div>
+                  <div *ngIf="a['details'].errors['required']">Product detail is required</div>
+                  <div *ngIf="a['details'].errors['maxlength']">Product detail is too long</div>
               </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && a['price'].errors }" min="1"/>
+                <input type="number" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && a['price'].errors }"/>
                 <div *ngIf="submitted && a['price'].errors" class="invalid-feedback">
                     <div *ngIf="a['price'].errors['required']">Price is required</div>
+                    <div *ngIf="a['price'].errors['min']">Price cannot be less than 1</div>
+
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Stock</label>
-                <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && a['stock'].errors }" min="0"/>
+                <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && a['stock'].errors }"/>
                 <div *ngIf="submitted && a['stock'].errors" class="invalid-feedback">
                     <div *ngIf="a['stock'].errors['required']">Stock is required</div>
+                    <div *ngIf="a['stock'].errors['min']">Stock cannot be negative</div>
                 </div>
             </div>
           </form>
