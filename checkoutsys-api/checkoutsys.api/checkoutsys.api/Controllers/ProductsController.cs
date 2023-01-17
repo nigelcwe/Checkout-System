@@ -70,16 +70,16 @@ namespace checkoutsys.api.Controllers
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(long id, PutProductRequest putProductRequest)
+        public async Task<IActionResult> PutProduct(long id, PutProductRequest req)
         {
             var product = await _context.Products.FindAsync(id);
 
             if (product != null)
             {
-                product.Name = putProductRequest.Name;
-                product.Details = putProductRequest.Details;
-                product.Price = putProductRequest.Price;
-                product.Stock = putProductRequest.Stock;
+                product.Name = req.Name;
+                product.Details = req.Details;
+                product.Price = req.Price;
+                product.Stock = req.Stock;
 
                 await _context.SaveChangesAsync();
 
@@ -92,13 +92,13 @@ namespace checkoutsys.api.Controllers
         // PUT: api/Products/PutStock/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("PutStock/{id}")]
-        public async Task<IActionResult> PutProductStock(long id, long stock)
+        public async Task<IActionResult> PutProductStock(long id, PutProductStockRequest req)
         {
             var product = await _context.Products.FindAsync(id);
 
             if (product != null)
             {
-                product.Stock = stock;
+                product.Stock = req.Stock;
 
                 await _context.SaveChangesAsync();
 
@@ -130,14 +130,14 @@ namespace checkoutsys.api.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(AddProductRequest addProductRequest)
+        public async Task<ActionResult<Product>> PostProduct(AddProductRequest req)
         {
             Product product = new Product();
-            product.AdminId = addProductRequest.AdminId;
-            product.Name = addProductRequest.Name;
-            product.Details = addProductRequest.Details;
-            product.Price = addProductRequest.Price;
-            product.Stock = addProductRequest.Stock;
+            product.AdminId = req.AdminId;
+            product.Name = req.Name;
+            product.Details = req.Details;
+            product.Price = req.Price;
+            product.Stock = req.Stock;
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();

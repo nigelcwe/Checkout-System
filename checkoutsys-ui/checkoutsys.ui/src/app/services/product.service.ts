@@ -25,7 +25,7 @@ export class ProductService {
   }
 
   public putProductStock(id: number, stock: number) : Observable<Product> {
-    var params = {'id': id, 'stock': stock};
+    var params = {'stock': stock};
     return this.http.put<Product> (
       `${environment.apiUrl}/${this.url}/PutStock/${id}`, params
     )
@@ -33,7 +33,6 @@ export class ProductService {
 
   public putProduct(id: number, name: string, details: string, price: number, stock: number) : Observable<Product> {
     var params = {
-      'id': id,
       'name': name,
       'details': details,
       'price': price,

@@ -55,15 +55,15 @@ namespace checkoutsys.api.Controllers
 
         // POST: api/Users/login
         [HttpPost("login")]
-        public async Task<ActionResult<User>> LoginUser(UserLoginRequest loginDetails)
+        public async Task<ActionResult<User>> LoginUser(UserLoginRequest req)
         {
             Boolean usernameFound = false;
             List<User> dbLst = await _context.Users.ToListAsync();
             foreach (var user in dbLst)
-                if (user.Username == loginDetails.Username)
+                if (user.Username == req.Username)
                 {
                     usernameFound = true;
-                    if (user.Password == loginDetails.Password)
+                    if (user.Password == req.Password)
                         return Ok(user);
                 }
 
@@ -117,23 +117,23 @@ namespace checkoutsys.api.Controllers
         // POST: api/Users/Register
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("register")]
-        public async Task<ActionResult<User>> RegisterUser(RegisterUserRequest newUserDetails)
+        public async Task<ActionResult<User>> RegisterUser(RegisterUserRequest req)
         {
             List<User> dbLst = await _context.Users.ToListAsync();
 
             foreach (var dbUser in dbLst)
             {
-                if (dbUser.Username == newUserDetails.Username)
+                if (dbUser.Username == req.Username)
                     return BadRequest("Username is already in use.");
-                else if (dbUser.Email == newUserDetails.Email)
+                else if (dbUser.Email == req.Email)
                     return BadRequest("Email is already in use.");
             }
 
             User user = new User();
-            user.Name = newUserDetails.Name;
-            user.Username = newUserDetails.Username;
-            user.Email = newUserDetails.Email;
-            user.Password = newUserDetails.Password;
+            user.Name = req.Name;
+            user.Username = req.Username;
+            user.Email = req.Email;
+            user.Password = req.Password;
             user.Role = "customer";
 
             _context.Users.Add(user);
