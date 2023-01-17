@@ -44,6 +44,7 @@ export class ProductTableComponent implements OnInit {
 
   ngOnDestroy() : void {
     this.subscription.unsubscribe();
+    clearInterval(this.interval);
   }
 
   refreshProducts() {
