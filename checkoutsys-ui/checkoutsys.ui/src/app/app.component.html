@@ -1,6 +1,6 @@
 <app-navbar data-bs-theme="dark"></app-navbar>
 <app-home data-bs-theme="dark" *ngIf="currUser.id == 0 || currUser == null"></app-home>
-<app-admin data-bs-theme="dark" *ngIf="currUser.id != 0 && currUser.role == 'admin'"></app-admin>
+<app-admin data-bs-theme="light" *ngIf="currUser.id != 0 && currUser.role == 'admin'"></app-admin>
 <app-customer data-bs-theme="dark" *ngIf="currUser.id != 0 && currUser.role == 'customer'"></app-customer>
 
 <router-outlet></router-outlet>
