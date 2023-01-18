@@ -28,21 +28,25 @@ export class UserService {
       )
   }
 
-  public login(username: string, password: string) : Observable<User> {
-    var params = {'username' : username, 'password': password};
-    return this.http.post<User>(
-      `${environment.apiUrl}/${this.url}/login`, params
+  public getUserFromToken(token: string) : Observable<User> {
+    return this.http.get<User>(
+      `${environment.apiUrl}/${this.url}/byToken/${token}`
     )
-  }
-
-  public logout() : void {
-    this.updateCurrUser(new User());
   }
 
   public register(fullName: string, username: string, email: string, password: string) : Observable<User> {
     var params = {'name' : fullName, 'username': username, 'email': email, 'password': password};
     return this.http.post<User>(
       `${environment.apiUrl}/${this.url}/register`, params
+    )
+  }
+
+  public login(username: string, password: string) : Observable<string> {
+    var params = {'username' : username, 'password': password};
+    return this.http.post(
+      `${environment.apiUrl}/${this.url}/login`, params, {
+        responseType: 'text',
+      }
     )
   }
 

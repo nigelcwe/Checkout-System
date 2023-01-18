@@ -19,5 +19,5 @@ public partial class Product
 
     public virtual User Admin { get; set; } = null!;
 
-    public virtual ICollection<OrderProducts> OrdersProducts { get; } = new List<OrderProducts>();
+    public virtual ICollection<OrdersProduct> OrdersProducts { get; } = new List<OrdersProduct>();
 }

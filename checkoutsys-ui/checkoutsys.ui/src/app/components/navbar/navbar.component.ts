@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { AdminService } from './../../services/admin.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private adminService: AdminService,
+    private authService: AuthService,
 
     ) {
   }
@@ -43,7 +45,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.userService.logout();
+    this.authService.logout();
+    console.log(localStorage.getItem("authToken"));
     this.router.navigateByUrl('');
   }
 

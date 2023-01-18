@@ -1,7 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { lastValueFrom, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private authService: AuthService,
 
   ) { }
 
@@ -64,17 +65,15 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    try {
-      var result$ = this.userService.login(this.f['username'].value, this.f['password'].value)
-      this.currUser = await lastValueFrom(result$);
-    } catch (error) {
+    
+    var login : boolean = await this.authService.login(this.f['username'].value, this.f['password'].value);
+    if (!login) {
       this.loading = false;
       return;
     }
     
     
     console.log(this.currUser);
-    this.userService.updateCurrUser(this.currUser);
     document.getElementById("loginModalClose")?.click();
   }
 }

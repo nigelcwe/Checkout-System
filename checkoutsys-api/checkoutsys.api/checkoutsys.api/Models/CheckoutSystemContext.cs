@@ -17,7 +17,7 @@ public partial class CheckoutSystemContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<OrderProducts> OrdersProducts { get; set; }
+    public virtual DbSet<OrdersProduct> OrdersProducts { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -25,15 +25,11 @@ public partial class CheckoutSystemContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=CheckoutSystem;Trusted_Connection=True;TrustServerCertificate=True;");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.Property(e => e.DateTime).HasColumnType("datetime");
+            entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.IsCompleted).HasMaxLength(5);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
@@ -42,7 +38,7 @@ public partial class CheckoutSystemContext : DbContext
                 .HasConstraintName("FK_Orders_Users");
         });
 
-        modelBuilder.Entity<OrderProducts>(entity =>
+        modelBuilder.Entity<OrdersProduct>(entity =>
         {
             entity.HasKey(e => new { e.OrderId, e.ProductId });
 
@@ -75,7 +71,7 @@ public partial class CheckoutSystemContext : DbContext
         {
             entity.HasIndex(e => e.OrderId, "IX_Transactions").IsUnique();
 
-            entity.Property(e => e.DateTime).HasColumnType("datetime");
+            entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.TotalPrice).HasColumnType("money");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Transactions)
@@ -91,11 +87,16 @@ public partial class CheckoutSystemContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasIndex(e => new { e.Name, e.Username, e.Email }, "IX_Users").IsUnique();
+            entity.HasIndex(e => e.Name, "IX_Users").IsUnique();
+
+            entity.HasIndex(e => e.Username, "IX_Users_1").IsUnique();
+
+            entity.HasIndex(e => e.Email, "IX_Users_2").IsUnique();
 
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.Name).HasMaxLength(50);
-            entity.Property(e => e.Password).HasMaxLength(20);
+            entity.Property(e => e.PasswordHash).HasMaxLength(150);
+            entity.Property(e => e.PasswordSalt).HasMaxLength(150);
             entity.Property(e => e.Role).HasMaxLength(8);
             entity.Property(e => e.Username).HasMaxLength(20);
         });

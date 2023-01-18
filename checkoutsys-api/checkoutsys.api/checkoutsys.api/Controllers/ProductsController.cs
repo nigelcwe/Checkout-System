@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using checkoutsys.api.Models;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 namespace checkoutsys.api.Controllers
 {
@@ -55,7 +56,7 @@ namespace checkoutsys.api.Controllers
         }
 
         // GET: api/Products/byUser
-        [HttpGet("byUserId/{id}")]
+        [HttpGet("byUserId/{id}"), Authorize(Roles = "admin")]
         public async Task<ActionResult<Product>> GetProductsByUser(long id)
         {
             List<Product> dbLst = await _context.Products.ToListAsync();
@@ -130,14 +131,14 @@ namespace checkoutsys.api.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(AddProductRequest req)
+        public async Task<ActionResult<Product>> PostProduct(AddProductRequest request)
         {
             Product product = new Product();
-            product.AdminId = req.AdminId;
-            product.Name = req.Name;
-            product.Details = req.Details;
-            product.Price = req.Price;
-            product.Stock = req.Stock;
+            product.AdminId = request.AdminId;
+            product.Name = request.Name;
+            product.Details = request.Details;
+            product.Price = request.Price;
+            product.Stock = request.Stock;
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();

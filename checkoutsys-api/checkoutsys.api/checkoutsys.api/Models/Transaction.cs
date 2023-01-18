@@ -11,7 +11,7 @@ public partial class Transaction
 
     public long CustomerId { get; set; }
 
-    public DateTime DateTime { get; set; }
+    public DateTime Date { get; set; }
 
     public decimal TotalPrice { get; set; }
 

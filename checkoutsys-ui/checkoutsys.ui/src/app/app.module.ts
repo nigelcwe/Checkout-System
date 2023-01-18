@@ -1,4 +1,5 @@
-import { ErrorService } from './services/error.service';
+import { AuthenticationInterceptor } from './services/auth.interceptor';
+import { ErrorInterceptor } from './services/error.interceptor';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -64,7 +65,12 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorService,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

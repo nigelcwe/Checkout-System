@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace checkoutsys.api.Models;
 
-public partial class OrderProducts
+public partial class OrdersProduct
 {
     public long OrderId { get; set; }
 

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,6 +23,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
+    private authService: AuthService,
 
   ) { }
 
@@ -68,21 +70,24 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.loading = true;
-    try {
-      var result$ = this.userService.register(
-        this.f['fullName'].value,
-        this.f['username'].value,
-        this.f['email'].value,
-        this.f['password'].value
-      )
-      this.currUser = await lastValueFrom(result$);
-    } catch (error) {
+    
+    var tempUser: User = new User();
+    tempUser.name = this.f['fullName'].value;
+    tempUser.username = this.f['username'].value;
+    tempUser.email = this.f['email'].value;
+    tempUser.password = this.f['password'].value;
+    
+    var register: boolean = await this.authService.register(tempUser);
+
+    if (!register) {
       this.loading = false;
       return;
     }
-    
+
+    var login: boolean = await this.authService.login(tempUser.username, tempUser.password);
+
+
     console.log(this.currUser);
-    this.userService.updateCurrUser(this.currUser);
     this.loading = false;
     document.getElementById("registrationModalClose")?.click();
   }
