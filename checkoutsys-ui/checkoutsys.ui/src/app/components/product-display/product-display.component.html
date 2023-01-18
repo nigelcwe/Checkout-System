@@ -36,8 +36,14 @@
             <div class="row mb-3">
                 <div class="card p-0">
                   <div class="card-body">
-                    <label class="form-label card-text">Amount</label>
-                    <input type="number" formControlName="qty" class="form-control"/>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <label class="form-label card-text">Amount</label>
+                        <input type="number" formControlName="stock" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['qty'].errors }"/>
+                        <div *ngIf="submitted && f['qty'].errors" class="invalid-feedback">
+                            <div *ngIf="f['qty'].errors['required']">Amount is required</div>
+                            <div *ngIf="f['qty'].errors['min']">Amount cannot be negative</div>
+                        </div>
+                    </form>
                   </div>
                 </div>
               </div>
