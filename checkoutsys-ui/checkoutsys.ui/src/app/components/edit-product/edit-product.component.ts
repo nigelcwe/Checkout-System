@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ProductService } from './../../services/product.service';
 import { UserService } from './../../services/user.service';
 import { Subscription } from 'rxjs';
@@ -31,7 +32,7 @@ export class EditProductComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private productService: ProductService,
 
@@ -74,7 +75,7 @@ export class EditProductComponent implements OnInit {
     this.subscription.add(this.productService.currProduct$.subscribe(product => {
       this.currProduct = product;
     }))
-    this.subscription.add(this.userService.currUser$.subscribe(user => {
+    this.subscription.add(this.authService.currUser$.subscribe(user => {
       this.currUser = user;
     }))
 

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { ProductService } from './../../services/product.service';
 import { UserService } from './../../services/user.service';
@@ -23,7 +24,7 @@ export class ProductDisplayComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
@@ -36,7 +37,7 @@ export class ProductDisplayComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.subscription.add(this.userService.currUser$.subscribe(user => {
+    this.subscription.add(this.authService.currUser$.subscribe(user => {
       this.currUser = user;
     }))
     this.subscription.add(this.productService.currProduct$.subscribe(product => {
@@ -57,7 +58,11 @@ export class ProductDisplayComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
+    this.submitted = true;
 
+    if (this.form.invalid) {
+      return;
+    }
   }
 
 }

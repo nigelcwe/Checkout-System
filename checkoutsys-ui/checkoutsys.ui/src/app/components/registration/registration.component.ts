@@ -22,7 +22,6 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
     private authService: AuthService,
 
   ) { }
@@ -35,7 +34,7 @@ export class RegistrationComponent implements OnInit {
     })
 
   ngOnInit(): void {
-    this.subscription = this.userService.currUser$.subscribe(user => 
+    this.subscription = this.authService.currUser$.subscribe(user => 
       {
         this.currUser = user;
       })

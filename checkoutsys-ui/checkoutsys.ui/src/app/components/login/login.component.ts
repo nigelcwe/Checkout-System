@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
     private authService: AuthService,
 
   ) { }
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.subscription = this.userService.currUser$.subscribe(user => 
+    this.subscription = this.authService.currUser$.subscribe(user => 
       {
         this.currUser = user;
       })
@@ -71,6 +70,11 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return;
     }
+
+    this.authService.currUser$.subscribe(user => {
+      this.currUser = user;
+      console.log(user);
+    })
     
     
     console.log(this.currUser);

@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { ProductService } from './../../services/product.service';
@@ -24,14 +25,14 @@ export class ProductTableComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private userService: UserService,
+    private authService: AuthService,
     private adminService: AdminService,
     private router: Router,
 
     ) {}
 
   ngOnInit() : void {
-    this.subscription.add(this.userService.currUser$.subscribe( user => {
+    this.subscription.add(this.authService.currUser$.subscribe( user => {
       this.currUser = user;
     }))
     this.subscription.add(this.productService.currProduct$.subscribe( product => {

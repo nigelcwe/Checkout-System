@@ -11,10 +11,7 @@ import { BehaviorSubject, Observer } from 'rxjs';
 export class UserService {
   private url = "Users";
 
-  private userSource = new BehaviorSubject<User>(new User());
-  currUser$ = this.userSource.asObservable();
-
-  constructor(private http: HttpClient) { }
+  constructor(protected http: HttpClient) { }
 
   public getUsers() : Observable<User[]> {
     return this.http.get<User[]>( 
@@ -34,23 +31,19 @@ export class UserService {
     )
   }
 
-  public register(fullName: string, username: string, email: string, password: string) : Observable<User> {
+  protected dbRegister(fullName: string, username: string, email: string, password: string) : Observable<User> {
     var params = {'name' : fullName, 'username': username, 'email': email, 'password': password};
     return this.http.post<User>(
       `${environment.apiUrl}/${this.url}/register`, params
     )
   }
 
-  public login(username: string, password: string) : Observable<string> {
+  protected dbLogin(username: string, password: string) : Observable<string> {
     var params = {'username' : username, 'password': password};
     return this.http.post(
       `${environment.apiUrl}/${this.url}/login`, params, {
         responseType: 'text',
       }
     )
-  }
-
-  public updateCurrUser(user: User) {
-    this.userSource.next(user);
   }
 }

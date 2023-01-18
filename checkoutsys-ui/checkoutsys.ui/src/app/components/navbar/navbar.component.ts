@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
   private subscription!: Subscription;
 
   constructor(
-    private userService: UserService,
     private router: Router,
     private adminService: AdminService,
     private authService: AuthService,
@@ -28,7 +27,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() : void {
-    this.subscription = this.userService.currUser$.subscribe(user => this.currUser = user)
+    this.subscription = this.authService.currUser$.subscribe(user => this.currUser = user)
     this.subscription.add(this.adminService.currStock$.subscribe(stock => {
       this.currStock = stock;
     }))

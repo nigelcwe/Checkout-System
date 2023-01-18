@@ -1,27 +1,38 @@
+import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  constructor(
-    private userService: UserService,
+export class AuthService extends UserService{
+  protected userSource = new BehaviorSubject<User>(new User());
+  currUser$ = this.userSource.asObservable();
 
-  ) { }
+  constructor(
+    protected override http: HttpClient,
+  ) {
+    super(
+      http
+    );
+  }
 
   async login(username: string, password: string) : Promise<boolean> {
     var currUser: User;
 
     try {
-      var loginResult$ = this.userService.login(username, password);
+      var loginResult$ = this.dbLogin(username, password);
       var token = await lastValueFrom(loginResult$);
       localStorage.setItem("authToken", token);
-      var result$ = this.userService.getUserFromToken(<string>localStorage.getItem("authToken"))
+      var result$ = this.getUserFromToken(<string>localStorage.getItem("authToken"))
       currUser = await lastValueFrom(result$);
-      this.userService.updateCurrUser(currUser);
+      console.log(currUser);
+      this.updateCurrUser(currUser);
+      // this.userSource.next(currUser);
+      this.currUser$.subscribe(user =>
+        console.log(user));
       return true;
     } catch (error) {
       return false;
@@ -31,7 +42,7 @@ export class AuthService {
   async register(user: User) : Promise<boolean> {
     var register: boolean = false;
     try {
-      var registerResult$ = this.userService.register(
+      var registerResult$ = this.dbRegister(
         user.name,
         user.username,
         user.email,
@@ -46,7 +57,11 @@ export class AuthService {
   }
 
   public logout() : void {
-    this.userService.updateCurrUser(new User());
+    this.updateCurrUser(new User());
     localStorage.removeItem("authToken");
+  }
+
+  public updateCurrUser(user: User) {
+    this.userSource.next(user);
   }
 }

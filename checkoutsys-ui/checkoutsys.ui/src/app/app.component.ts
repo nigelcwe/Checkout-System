@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
 import { User } from './models/user';
 import { UserService } from './services/user.service';
@@ -16,13 +17,13 @@ export class AppComponent {
   users: User[] = [];
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
 
     ) {}
 
   ngOnInit() : void {
-    this.subscription = this.userService.currUser$.subscribe(user => this.currUser = user)
+    this.subscription = this.authService.currUser$.subscribe(user => this.currUser = user)
   }
 
   ngOnDestroy() : void {

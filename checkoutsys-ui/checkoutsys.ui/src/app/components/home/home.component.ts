@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -14,12 +15,12 @@ export class HomeComponent implements OnInit {
   private subscription?: Subscription;
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.userService.currUser$.subscribe(user => this.currUser = user)
+    this.subscription = this.authService.currUser$.subscribe(user => this.currUser = user)
   }
 
   ngOnDestroy(): void {
