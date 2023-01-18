@@ -30,7 +30,7 @@ namespace checkoutsys.api.Controllers
         }
 
         // GET: api/Products/valid
-        [HttpGet("valid")]
+        [HttpGet("valid"), Authorize(Roles = "customer")]
         public async Task<ActionResult<Product>> GetValidProducts()
         {
             List<Product> dbLst = await _context.Products.ToListAsync();
@@ -70,7 +70,7 @@ namespace checkoutsys.api.Controllers
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = "admin")]
         public async Task<IActionResult> PutProduct(long id, PutProductRequest req)
         {
             var product = await _context.Products.FindAsync(id);
@@ -92,7 +92,7 @@ namespace checkoutsys.api.Controllers
 
         // PUT: api/Products/PutStock/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("PutStock/{id}")]
+        [HttpPut("PutStock/{id}"), Authorize(Roles = "admin")]
         public async Task<IActionResult> PutProductStock(long id, PutProductStockRequest req)
         {
             var product = await _context.Products.FindAsync(id);
@@ -111,7 +111,7 @@ namespace checkoutsys.api.Controllers
 
         // PUT: api/Products/DecreaseStock/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("DecreaseStock/{id}")]
+        [HttpPut("DecreaseStock/{id}"), Authorize(Roles = "customer")]
         public async Task<IActionResult> DecreaseProductStock(long id)
         {
             var product = await _context.Products.FindAsync(id);
@@ -130,7 +130,7 @@ namespace checkoutsys.api.Controllers
 
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "admin")]
         public async Task<ActionResult<Product>> PostProduct(AddProductRequest request)
         {
             Product product = new Product();

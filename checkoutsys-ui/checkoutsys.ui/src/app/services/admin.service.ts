@@ -10,13 +10,9 @@ export class AdminService {
   private detailsSource = new BehaviorSubject<boolean>(false);
   private addSource = new BehaviorSubject<boolean>(false);
 
-  private productSource = new BehaviorSubject<Product>(new Product());
-
   currStock$ = this.stockSource.asObservable();
   currDetails$ = this.detailsSource.asObservable();
   currAdd$ = this.addSource.asObservable();
-
-  currProduct$ = this.productSource.asObservable();
 
   constructor() { }
 
@@ -30,9 +26,5 @@ export class AdminService {
 
   public updateCurrAdd(bool: boolean) {
     this.addSource.next(bool);
-  }
-
-  public updateCurrProduct(product: Product) {
-    this.productSource.next(product);
   }
 }

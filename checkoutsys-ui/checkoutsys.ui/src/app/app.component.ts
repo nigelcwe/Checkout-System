@@ -22,10 +22,6 @@ export class AppComponent {
     ) {}
 
   ngOnInit() : void {
-    // this.userService.getUser(1).subscribe(user => {
-    //   this.currUser = user;
-    // })
-    // this.userService.updateCurrUser(this.currUser);
     this.subscription = this.userService.currUser$.subscribe(user => this.currUser = user)
   }
 

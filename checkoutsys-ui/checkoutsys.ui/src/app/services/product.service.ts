@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
@@ -9,6 +10,9 @@ import { Product } from '../models/product';
 })
 export class ProductService {
   private url = "Products";
+  private productSource = new BehaviorSubject<Product>(new Product());
+  currProduct$ = this.productSource.asObservable();
+
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +20,12 @@ export class ProductService {
     return this.http.get<Product[]>( 
       `${environment.apiUrl}/${this.url}`
       )
+  }
+
+  public getValidProducts() : Observable<Product[]> {
+    return this.http.get<Product[]>(
+      `${environment.apiUrl}/${this.url}/valid`
+    )
   }
 
   public getProductsByAdminId(id: number) : Observable<Product[]> {
@@ -54,5 +64,9 @@ export class ProductService {
     return this.http.post<Product> (
       `${environment.apiUrl}/${this.url}`, params
     )
+  }
+
+  public updateCurrProduct(product: Product) {
+    this.productSource.next(product);
   }
  }

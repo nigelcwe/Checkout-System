@@ -1,0 +1,54 @@
+<div class="modal fade" id="productModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="loginModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="productModal">
+            {{ currProduct.name }}
+          </h1>
+          <button id="productModalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" routerLink=""></button>
+        </div>
+        <div class="modal-body p-0 px-3 pt-3">
+          <div class="container-fluid ">
+            <div class="row mb-2">
+              <div class="col-6 ps-0 pe-1">
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">Price: {{ currProduct.price }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 ps-1 pe-0">
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">Stock: {{ currProduct.stock }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="card p-0">
+                <div class="card-body">
+                  <h6 class="card-title">Details</h6>
+                  <p class="card-text">{{ currProduct.details }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+                <div class="card p-0">
+                  <div class="card-body">
+                    <label class="form-label card-text">Amount</label>
+                    <input type="number" formControlName="qty" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="loading"  class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -20,6 +20,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { ValidProductsTableComponent } from './components/valid-products-table/valid-products-table.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ProductDisplayComponent } from './components/product-display/product-display.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     CheckoutComponent,
     ProductTableComponent,
+    ProductDisplayComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,11 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
         path: 'edit-product',
         component: EditProductComponent
       },
-
+      {
+        path: 'view-product',
+        component: ProductDisplayComponent
+      },
+      
     ])
   ],
   providers: [

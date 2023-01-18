@@ -1,4 +1,4 @@
-<div class="modal" id="stockModal" data-bs-backdrop="true" data-bs-keyboard="false" aria-labelledby="stockModalLabel" aria-hidden="false">
+<div class="modal fade" id="stockModal" data-bs-backdrop="true" data-bs-keyboard="false" aria-labelledby="stockModalLabel" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -131,7 +131,6 @@
                 <div *ngIf="submitted && a['price'].errors" class="invalid-feedback">
                     <div *ngIf="a['price'].errors['required']">Price is required</div>
                     <div *ngIf="a['price'].errors['min']">Price cannot be less than 1</div>
-
                 </div>
             </div>
             <div class="mb-3">

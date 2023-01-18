@@ -71,7 +71,7 @@ export class EditProductComponent implements OnInit {
     this.subscription.add(this.adminService.currAdd$.subscribe(add => {
       this.isAdd = add;
     }))
-    this.subscription.add(this.adminService.currProduct$.subscribe(product => {
+    this.subscription.add(this.productService.currProduct$.subscribe(product => {
       this.currProduct = product;
     }))
     this.subscription.add(this.userService.currUser$.subscribe(user => {

@@ -18,7 +18,8 @@ export class ProductTableComponent implements OnInit {
   dropDownBtn = document.getElementsByClassName('dropdown-toggle') as HTMLCollectionOf<HTMLElement>;
   currUser!: User;
   currProduct!: Product;
-  productLst: any;
+  adminProductLst: any;
+  validProductLst: any;
   interval: any;
 
   constructor(
@@ -33,7 +34,7 @@ export class ProductTableComponent implements OnInit {
     this.subscription.add(this.userService.currUser$.subscribe( user => {
       this.currUser = user;
     }))
-    this.subscription.add(this.adminService.currProduct$.subscribe( product => {
+    this.subscription.add(this.productService.currProduct$.subscribe( product => {
       this.currProduct = product;
     }))
     this.refreshProducts();
@@ -48,18 +49,32 @@ export class ProductTableComponent implements OnInit {
   }
 
   refreshProducts() {
-    this.subscription.add(
-      this.productService.getProductsByAdminId(this.currUser.id)
-      .subscribe(products => {
-        this.productLst = products;
-      })
-    )
+    if (this.currUser.role == "admin") {
+      this.subscription.add(
+        this.productService.getProductsByAdminId(this.currUser.id)
+        .subscribe(products => {
+          this.adminProductLst = products;
+        })
+      )
+    } else if (this.currUser.role == "customer") {
+      this.subscription.add(
+        this.productService.getValidProducts()
+        .subscribe(products => {
+          this.validProductLst = products;
+        })
+      )
+    }
   }
 
   getRowIndex(btn: HTMLButtonElement) {
     let tabIndex: number = <number>btn.closest('tr')?.rowIndex;
-    this.currProduct = this.productLst[tabIndex];
-    this.adminService.updateCurrProduct(this.currProduct);
+    if (this.currUser.role == "admin") {
+      this.currProduct = this.adminProductLst[tabIndex];
+    } else if (this.currUser.role == "customer") {
+      this.currProduct = this.validProductLst[tabIndex];
+    }
+
+    this.productService.updateCurrProduct(this.currProduct);
   }
 
   editStock() {
@@ -87,5 +102,10 @@ export class ProductTableComponent implements OnInit {
     }
     )
     this.router.navigateByUrl("/edit-product"); 
+  }
+
+  showProduct(btn: HTMLButtonElement) {
+    this.getRowIndex(btn);
+    this.router.navigateByUrl("/view-product")
   }
 }
