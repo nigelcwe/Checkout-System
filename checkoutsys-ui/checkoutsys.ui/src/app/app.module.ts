@@ -16,8 +16,10 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
-import { ProductTableComponent } from './components/product-table/product-table.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { ValidProductsTableComponent } from './components/valid-products-table/valid-products-table.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     CustomerComponent,
     RegistrationComponent,
     LoginComponent,
-    ProductTableComponent,
     EditProductComponent,
+    ValidProductsTableComponent,
+    CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
