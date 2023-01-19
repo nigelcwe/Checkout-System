@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using checkoutsys.api.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Globalization;
 
 namespace checkoutsys.api.Controllers
 {
@@ -20,6 +21,20 @@ namespace checkoutsys.api.Controllers
         public OrdersController(CheckoutSystemContext context)
         {
             _context = context;
+        }
+
+        // GET: api/Orders
+        [HttpGet]
+        public async Task<ActionResult<Order>> GetOrder(long id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(order);
         }
 
         // GET: api/Orders/GetIncomplete/5
@@ -73,6 +88,8 @@ namespace checkoutsys.api.Controllers
             order.CustomerId = request.CustomerId;
             order.Date = request.Date;
             order.IsCompleted = request.IsCompleted;
+
+            _context.Add(order);
 
             await _context.SaveChangesAsync();
 

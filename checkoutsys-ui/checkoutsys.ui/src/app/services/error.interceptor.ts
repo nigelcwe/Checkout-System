@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { catchError, Observable, of, retry, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor{
         } else if (error.status == 400) {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`
         } else if (error.status == 404) {
-          return throwError(error);
+          return of();
         } else {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }

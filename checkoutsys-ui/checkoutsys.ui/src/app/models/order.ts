@@ -5,7 +5,7 @@ import { User } from "./user";
 export class Order {
     id?: number;
     customerId?: number;
-    dateTime?: Date;
+    date?: Date;
     isCompleted = "";
     user?: User;
     orderProducts: OrderProducts[] = [];

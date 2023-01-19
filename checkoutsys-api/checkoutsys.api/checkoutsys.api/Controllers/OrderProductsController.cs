@@ -23,7 +23,7 @@ namespace checkoutsys.api.Controllers
             _context = context;
         }
 
-        // GET: api/OrdersProducts/GetByOrder/5
+        // GET: api/OrderProducts/GetByOrder/5
         [HttpGet("GetByOrder/{id}"), Authorize(Roles = "customer")]
         public async Task<ActionResult<IEnumerable<OrderProducts>>> GetByOrder(long id)
         {
@@ -39,7 +39,7 @@ namespace checkoutsys.api.Controllers
         // PUT: api/OrderProducts/PutByOrder/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("PutByOrder/{id}"), Authorize(Roles = "customer")]
-        public async Task<IActionResult> PutByOrder(long id, IEnumerable<OrderProducts> newLst)
+        public async Task<IActionResult> PutByOrder(long id, IEnumerable<OrderProductsRequest> requestLst)
         {
             List<OrderProducts> dbLst = await _context.OrdersProducts.ToListAsync();
             try
@@ -49,9 +49,13 @@ namespace checkoutsys.api.Controllers
                     if (orderProduct.OrderId == id) _context.OrdersProducts.Remove(orderProduct);
                 }
 
-                foreach (var orderProduct in newLst)
+                var orderProducts = new OrderProducts();
+                foreach (var request in requestLst)
                 {
-                    _context.Add(orderProduct);
+                    orderProducts.OrderId = request.OrderId;
+                    orderProducts.ProductId = request.ProductId;
+                    orderProducts.ProductQty = request.ProductQty;
+                    _context.Add(orderProducts);
                 }
 
                 await _context.SaveChangesAsync();
@@ -67,7 +71,7 @@ namespace checkoutsys.api.Controllers
         // POST: api/OrderProducts/PostByOrder/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("PostByOrder/{id}"), Authorize(Roles = "customer")]
-        public async Task<IActionResult> PostByOrder(long id, IEnumerable<OrderProducts> newLst)
+        public async Task<IActionResult> PostByOrder(long id, IEnumerable<OrderProductsRequest> requestLst)
         {
             List<OrderProducts> dbLst = await _context.OrdersProducts.ToListAsync();
 
@@ -78,9 +82,13 @@ namespace checkoutsys.api.Controllers
                     if (orderProduct.OrderId == id) return BadRequest("Order data already exists.");
                 }
 
-                foreach (var orderProduct in newLst)
+                var orderProducts = new OrderProducts();
+                foreach (var request in requestLst)
                 {
-                    _context.Add(orderProduct);
+                    orderProducts.OrderId = request.OrderId;
+                    orderProducts.ProductId = request.ProductId;
+                    orderProducts.ProductQty = request.ProductQty;
+                    _context.Add(orderProducts);
                 }
 
                 await _context.SaveChangesAsync();
