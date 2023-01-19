@@ -18,12 +18,13 @@ export class ErrorInterceptor implements HttpInterceptor{
           errorMessage = `Error: ${error.error.message}`;
         } else if (error.status == 400) {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.error}`
-        }
-         else {
+        } else if (error.status == 404) {
+          return throwError(error);
+        } else {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
         window.alert(errorMessage);
-        return throwError(errorMessage);
+        return throwError(error);
       })
     )
   }

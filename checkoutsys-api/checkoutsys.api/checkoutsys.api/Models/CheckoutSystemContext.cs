@@ -17,7 +17,7 @@ public partial class CheckoutSystemContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<OrdersProduct> OrdersProducts { get; set; }
+    public virtual DbSet<OrderProducts> OrdersProducts { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
 
@@ -38,7 +38,7 @@ public partial class CheckoutSystemContext : DbContext
                 .HasConstraintName("FK_Orders_Users");
         });
 
-        modelBuilder.Entity<OrdersProduct>(entity =>
+        modelBuilder.Entity<OrderProducts>(entity =>
         {
             entity.HasKey(e => new { e.OrderId, e.ProductId });
 

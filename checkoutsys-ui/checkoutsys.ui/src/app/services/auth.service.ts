@@ -28,11 +28,7 @@ export class AuthService extends UserService{
       localStorage.setItem("authToken", token);
       var result$ = this.getUserFromToken(<string>localStorage.getItem("authToken"))
       currUser = await lastValueFrom(result$);
-      console.log(currUser);
       this.updateCurrUser(currUser);
-      // this.userSource.next(currUser);
-      this.currUser$.subscribe(user =>
-        console.log(user));
       return true;
     } catch (error) {
       return false;

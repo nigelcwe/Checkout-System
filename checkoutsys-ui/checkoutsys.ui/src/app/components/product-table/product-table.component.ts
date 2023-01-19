@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorService } from './../../services/error.service';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -5,7 +7,7 @@ import { ProductService } from './../../services/product.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AdminService } from 'src/app/services/admin.service';
 
@@ -19,6 +21,7 @@ export class ProductTableComponent implements OnInit {
   dropDownBtn = document.getElementsByClassName('dropdown-toggle') as HTMLCollectionOf<HTMLElement>;
   currUser!: User;
   currProduct!: Product;
+  currError!: Error;
   adminProductLst: any;
   validProductLst: any;
   interval: any;
@@ -28,6 +31,7 @@ export class ProductTableComponent implements OnInit {
     private authService: AuthService,
     private adminService: AdminService,
     private router: Router,
+    private errorService: ErrorService,
 
     ) {}
 
@@ -38,6 +42,9 @@ export class ProductTableComponent implements OnInit {
     this.subscription.add(this.productService.currProduct$.subscribe( product => {
       this.currProduct = product;
     }))
+    this.subscription.add(this.errorService.currError$.subscribe(error => {
+      this.currError = error;
+    }))
     this.refreshProducts();
     this.interval = setInterval(() => {
       this.refreshProducts();
@@ -45,11 +52,15 @@ export class ProductTableComponent implements OnInit {
   }
 
   ngOnDestroy() : void {
+    this.errorService.removeCurrError();
     this.subscription.unsubscribe();
     clearInterval(this.interval);
   }
 
   refreshProducts() {
+    if (this.currError instanceof HttpErrorResponse) {
+      if (this.currError.status == 404) return;
+    }
     if (this.currUser.role == "admin") {
       this.subscription.add(
         this.productService.getProductsByAdminId(this.currUser.id)

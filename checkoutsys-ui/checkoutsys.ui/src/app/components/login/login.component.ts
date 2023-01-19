@@ -70,12 +70,6 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return;
     }
-
-    this.authService.currUser$.subscribe(user => {
-      this.currUser = user;
-      console.log(user);
-    })
-    
     
     console.log(this.currUser);
     document.getElementById("loginModalClose")?.click();

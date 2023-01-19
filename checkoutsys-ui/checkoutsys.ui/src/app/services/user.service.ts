@@ -19,11 +19,11 @@ export class UserService {
       )
   }
 
-  public getUser(id: number) : Observable<User> {
-    return this.http.get<User>( 
-      `${environment.apiUrl}/${this.url}/byId/${id}`
-      )
-  }
+  // public getUser(id: number) : Observable<User> {
+  //   return this.http.get<User>( 
+  //     `${environment.apiUrl}/${this.url}/byId/${id}`
+  //     )
+  // }
 
   public getUserFromToken(token: string) : Observable<User> {
     return this.http.get<User>(

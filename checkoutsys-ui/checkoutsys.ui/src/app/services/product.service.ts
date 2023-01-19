@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { ErrorService } from './error.service';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
@@ -14,24 +15,35 @@ export class ProductService {
   currProduct$ = this.productSource.asObservable();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private errorService: ErrorService) { }
 
-  public getProducts() : Observable<Product[]> {
-    return this.http.get<Product[]>( 
-      `${environment.apiUrl}/${this.url}`
-      )
-  }
+  // public getProducts() : Observable<Product[]> {
+  //   return this.http.get<Product[]>( 
+  //     `${environment.apiUrl}/${this.url}`
+  //     )
+  // }
 
   public getValidProducts() : Observable<Product[]> {
     return this.http.get<Product[]>(
       `${environment.apiUrl}/${this.url}/valid`
-    )
+    ).pipe(catchError(err => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status == 404) this.errorService.updateCurrError(err);
+      }
+      return of();
+    }))
   }
 
   public getProductsByAdminId(id: number) : Observable<Product[]> {
     return this.http.get<Product[]> (
       `${environment.apiUrl}/${this.url}/byUserId/${id}`
-    )
+    ).pipe(catchError(err => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status == 404) this.errorService.updateCurrError(err);
+      }
+      return of();
+    }))
   }
 
   public putProductStock(id: number, stock: number) : Observable<Product> {

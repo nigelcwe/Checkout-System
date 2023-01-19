@@ -22,13 +22,6 @@ namespace checkoutsys.api.Controllers
             _context = context;
         }
 
-        // GET: api/Products
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
-        {
-            return await _context.Products.ToListAsync();
-        }
-
         // GET: api/Products/valid
         [HttpGet("valid"), Authorize(Roles = "customer")]
         public async Task<ActionResult<Product>> GetValidProducts()
@@ -64,7 +57,7 @@ namespace checkoutsys.api.Controllers
             foreach (var product in dbLst)
                 if (product.AdminId == id) productLst.Add(product);
 
-            if (productLst.IsNullOrEmpty()) return BadRequest("No products found.");
+            if (productLst.IsNullOrEmpty()) return NotFound("No products found.");
             else return Ok(productLst);
         }
 
@@ -92,7 +85,7 @@ namespace checkoutsys.api.Controllers
 
         // PUT: api/Products/PutStock/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("PutStock/{id}"), Authorize(Roles = "admin")]
+        [HttpPut("PutStock/{id}"), Authorize]
         public async Task<IActionResult> PutProductStock(long id, PutProductStockRequest req)
         {
             var product = await _context.Products.FindAsync(id);
@@ -144,22 +137,6 @@ namespace checkoutsys.api.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
-        }
-
-        // DELETE: api/Products/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(long id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool ProductExists(long id)
