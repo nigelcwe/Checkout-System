@@ -1,7 +1,7 @@
 import { ErrorService } from './error.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../models/order';
 
@@ -9,6 +9,8 @@ import { Order } from '../models/order';
   providedIn: 'root'
 })
 export class OrderService {
+  protected orderSource = new BehaviorSubject<Order>(new Order());
+  currOrder$ = this.orderSource.asObservable();
   private url = 'Orders';
 
   constructor(
@@ -22,7 +24,11 @@ export class OrderService {
       `${environment.apiUrl}/${this.url}/GetIncomplete/${custId}`
     ).pipe(catchError(err => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status == 404) this.errorService.updateCurrError(err);
+        if (err.status == 404) {
+          this.errorService.updateCurrError(err);
+          var errorMessage = `Error Code: ${err.status}\nMessage: ${err.error}`;
+          window.alert(errorMessage);   
+        }
       }
       return of();
     }))
@@ -49,5 +55,9 @@ export class OrderService {
     return this.http.post<Order>(
       `${environment.apiUrl}/${this.url}`, params
     )
+  }
+
+  public updateCurrOrder(order: Order) {
+    this.orderSource.next(order);
   }
 }

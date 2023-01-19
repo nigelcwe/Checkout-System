@@ -2,11 +2,11 @@ import { Order } from "./order";
 import { User } from "./user";
 
 export class Transaction {
-    id?: number;
-    orderId?: number;
-    customerId?: number;
-    dateTime?: Date;
-    totalPrice?: number;
+    id: number = 0;
+    orderId: number = 0;
+    customerId: number = 0;
+    dateTime: Date = new Date();
+    totalPrice: number = 0;
     customer?: User;
     order?: Order;
 }

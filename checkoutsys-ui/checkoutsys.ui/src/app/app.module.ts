@@ -21,6 +21,8 @@ import { ValidProductsTableComponent } from './components/valid-products-table/v
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductDisplayComponent } from './components/product-display/product-display.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ProductDisplayComponent } from './components/product-display/product-di
     CheckoutComponent,
     ProductTableComponent,
     ProductDisplayComponent,
+    PieChartComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +73,10 @@ import { ProductDisplayComponent } from './components/product-display/product-di
       {
         path: 'view-product',
         component: ProductDisplayComponent
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       },
       
     ])

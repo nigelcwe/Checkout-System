@@ -1,1 +1,51 @@
-<p>cart works!</p>
+<div class="modal fade" id="cartModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="cartModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="cartModalLabel">Cart</h1>
+          <button id="cartModalClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" routerLink=""></button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body container-fluid">
+            <table *ngIf="currUser.role == 'customer'" class="w-auto text-center">
+              <thead class="column-gap-2">
+                <th class="col-4">Product Name</th>
+                <th ></th>
+                <th class="col-3">Amount</th>
+                <th ></th>
+                <th class="col-3">Total Price</th>
+                <th ></th>
+                <th class="col-2"></th>
+              </thead>
+              <tbody class="column-gap-2">
+                <tr *ngFor="let item of productLst">
+                  <td>{{ item.product.name }}</td>
+                  <td class="m-3">|</td>
+                  <td>{{ item.productQty }}</td>
+                  <td class="m-3">|</td>
+                  <td>{{ calculatePrice(item) }}</td>
+                  <td class="m-3">|</td>
+                  <td>
+                    <div class="dropdown">
+                      <button #dropdownBtn class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="getRowIndex(dropdownBtn)">
+                        Edit
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" data-bs-dismiss="modal" (click)="editQty()">Edit Amount</a></li>
+                        <li><a class="dropdown-item" (click)="removeProduct(dropdownBtn)" >Remove</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button [disabled]="loading"  class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

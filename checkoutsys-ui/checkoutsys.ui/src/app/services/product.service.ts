@@ -14,7 +14,6 @@ export class ProductService {
   private productSource = new BehaviorSubject<Product>(new Product());
   currProduct$ = this.productSource.asObservable();
 
-
   constructor(private http: HttpClient,
     private errorService: ErrorService) { }
 
@@ -23,6 +22,12 @@ export class ProductService {
   //     `${environment.apiUrl}/${this.url}`
   //     )
   // }
+
+  public getProduct(id: number) : Observable<Product> {
+    return this.http.get<Product>(
+      `${environment.apiUrl}/${this.url}/${id}`
+    )
+  }
 
   public getValidProducts() : Observable<Product[]> {
     return this.http.get<Product[]>(

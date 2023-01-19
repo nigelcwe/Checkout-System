@@ -35,7 +35,7 @@ namespace checkoutsys.api.Controllers
         }
 
         // GET: api/Products/5
-        [HttpGet("byId/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(long id)
         {
             var product = await _context.Products.FindAsync(id);

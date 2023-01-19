@@ -29,10 +29,12 @@ namespace checkoutsys.api.Controllers
         {
             List<OrderProducts> dbLst = await _context.OrdersProducts.ToListAsync();
             List<OrderProducts> productLst = new List<OrderProducts>();
-            foreach (var orderProduct in dbLst)
-                if (orderProduct.OrderId == id) productLst.Add(orderProduct);
-
-            if (productLst.IsNullOrEmpty()) return BadRequest("No products in cart.");
+            foreach (OrderProducts orderProduct in dbLst)
+                if (orderProduct.OrderId == id)
+                {
+                    productLst.Add(orderProduct);
+                }
+            if (productLst.IsNullOrEmpty()) return BadRequest("Cart is empty.");
             else return Ok(productLst);
         }
 
@@ -44,9 +46,11 @@ namespace checkoutsys.api.Controllers
             List<OrderProducts> dbLst = await _context.OrdersProducts.ToListAsync();
             try
             {
-                foreach (var orderProduct in dbLst)
+                foreach (OrderProducts orderProduct in dbLst)
                 {
                     if (orderProduct.OrderId == id) _context.OrdersProducts.Remove(orderProduct);
+                    await _context.SaveChangesAsync();
+
                 }
 
                 var orderProducts = new OrderProducts();
@@ -56,9 +60,10 @@ namespace checkoutsys.api.Controllers
                     orderProducts.ProductId = request.ProductId;
                     orderProducts.ProductQty = request.ProductQty;
                     _context.Add(orderProducts);
+                    await _context.SaveChangesAsync();
+
                 }
 
-                await _context.SaveChangesAsync();
 
                 return Ok();
 

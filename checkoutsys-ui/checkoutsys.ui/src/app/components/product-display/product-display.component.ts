@@ -1,12 +1,14 @@
+import { OrderService } from './../../services/order.service';
+import { OrderProductsService } from './../../services/order-products.service';
 import { AuthService } from './../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { ProductService } from './../../services/product.service';
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Order } from 'src/app/models/order';
 
 declare var window: any;
 
@@ -22,6 +24,8 @@ export class ProductDisplayComponent implements OnInit {
   formModal: any;
   loading = false;
   submitted = false;
+  productLst: any;
+  currOrder!: Order;
 
   constructor(
     private authService: AuthService,
@@ -29,6 +33,8 @@ export class ProductDisplayComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private orderProductsService: OrderProductsService,
+    private orderService: OrderService,
 
   ) { }
 
@@ -43,6 +49,12 @@ export class ProductDisplayComponent implements OnInit {
     this.subscription.add(this.productService.currProduct$.subscribe(product => {
       this.currProduct = product;
     }))
+    this.subscription.add(this.orderProductsService.currProductLst$.subscribe(lst => {
+      this.productLst = lst;
+    }))
+    this.subscription.add(this.orderService.currOrder$.subscribe(order => {
+      this.currOrder = order;
+    }))
 
     this.form = this.formBuilder.group({
       qty: ['', [Validators.required, Validators.min(0)]]
@@ -55,6 +67,10 @@ export class ProductDisplayComponent implements OnInit {
     this.formModal.show();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   get f() { return this.form.controls; }
 
   onSubmit() {
@@ -63,6 +79,15 @@ export class ProductDisplayComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
+    this.loading = true;
+
+    if (this.f['qty'].value == 0) {
+      var index = this.productLst.indexOf(this.currProduct);
+      var temp = this.orderProductsService.putByOrderId(this.currOrder.id, this.productLst.splice(index, 1));
+    }
+
+
   }
 
 }
