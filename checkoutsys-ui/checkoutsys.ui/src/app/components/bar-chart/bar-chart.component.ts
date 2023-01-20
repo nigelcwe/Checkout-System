@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartConfiguration } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js';
 import { Transaction } from 'src/app/models/transaction';
 import { TransactionService } from 'src/app/services/transaction.service';
 
@@ -35,7 +35,20 @@ export class BarChartComponent implements OnInit {
     ],
     datasets: [
       { 
-        data: [], 
+        data: [
+          this.transactionLst[0],
+          this.transactionLst[1],
+          this.transactionLst[2],
+          this.transactionLst[3],
+          this.transactionLst[4],
+          this.transactionLst[5],
+          this.transactionLst[6],
+          this.transactionLst[7],
+          this.transactionLst[8],
+          this.transactionLst[9],
+          this.transactionLst[10],
+          this.transactionLst[11],
+        ], 
         label: 'Total sales by month' 
       },
     ]
@@ -51,7 +64,7 @@ export class BarChartComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.subscription.add(this.transactionService.getByYear(this.year).subscribe( data => {
+    this.subscription.add(this.transactionService.getByYear(this.year).subscribe(data => {
       var count = 0;
       while (count <= 11) {
         var value = 0;
@@ -65,12 +78,34 @@ export class BarChartComponent implements OnInit {
         this.transactionLst.push(value);
         count ++;
       }
-      console.log(this.transactionLst);
-      var param: any = {data: this.transactionLst, labels: "Total Sales by Month"};
-      console.log(param);
-      this.barChartData.datasets.pop();
-      this.barChartData.datasets.push(param);
-    }))    
+      this.RenderChart();
+    }))
+  }
+
+  RenderChart() {
+    const myChart = new Chart("barChart", {
+      type: 'bar',
+      data: {
+        labels: [ 
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec' 
+        ],
+        datasets: [{
+          label: 'Total Sales by Month ($)',
+          data: this.transactionLst,
+        }]
+      }
+    })
   }
 
   ngOnDestroy() {
