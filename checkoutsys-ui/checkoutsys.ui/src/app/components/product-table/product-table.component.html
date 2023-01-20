@@ -1,4 +1,4 @@
-<div data-bs-theme="light" class="card w-auto m-5 p-2 h-auto">
+<div data-bs-theme="light" class="card w-auto mx-5 p-2 h-auto">
   <div *ngIf="currUser.role == 'admin'" class="card-header position-relative">
     Your Products
     <button class="btn btn-light position-absolute top-50 end-0 translate-middle-y" type="button" (click)="addProduct()">
@@ -11,7 +11,7 @@
   </div>
 
   <div class="card-body container-fluid">
-    <table *ngIf="currUser.role == 'admin'" class="w-auto text-center">
+    <table *ngIf="currUser.role == 'admin'" class="text-center">
       <thead class="column-gap-2">
         <th class="col-2">Id</th>
         <th ></th>

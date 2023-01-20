@@ -1,4 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-customer',
@@ -6,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
+  private subscription: Subscription = new Subscription();
+  currUser!: User;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+
+  ) { }
 
   ngOnInit(): void {
+    this.subscription.add(this.authService.currUser$.subscribe(data => {
+      this.currUser = data;
+    }))
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

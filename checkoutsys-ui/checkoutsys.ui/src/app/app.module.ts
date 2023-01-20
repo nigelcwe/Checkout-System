@@ -17,12 +17,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
-import { ValidProductsTableComponent } from './components/valid-products-table/valid-products-table.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ProductDisplayComponent } from './components/product-display/product-display.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { TransactionDisplayComponent } from './components/transaction-display/transaction-display.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -35,19 +36,20 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
     RegistrationComponent,
     LoginComponent,
     EditProductComponent,
-    ValidProductsTableComponent,
     CartComponent,
     CheckoutComponent,
     ProductTableComponent,
     ProductDisplayComponent,
     PieChartComponent,
     BarChartComponent,
+    TransactionDisplayComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgChartsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       {

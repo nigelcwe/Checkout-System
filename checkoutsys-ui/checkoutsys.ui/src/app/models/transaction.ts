@@ -5,7 +5,7 @@ export class Transaction {
     id: number = 0;
     orderId: number = 0;
     customerId: number = 0;
-    dateTime: Date = new Date();
+    date: Date = new Date();
     totalPrice: number = 0;
     customer?: User;
     order?: Order;

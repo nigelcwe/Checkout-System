@@ -1,2 +1,37 @@
-<p>HOME</p>
-<app-user-table></app-user-table>
+<div class="my-4">
+    <h5 class="text-center mt-2">
+        Dashboard
+    </h5>
+</div>
+<div class="card w-auto mx-5 my-3 p-2 h-auto">
+    <div class="card-header">
+        User List
+    </div>
+    <div class="card-body container-fluid">
+        <app-user-table></app-user-table>
+    </div>
+</div>
+<div class="card w-auto mx-5 my-3 p-2 h-auto">
+    <div class="card-header">
+        Total Transaction ({{ year }})
+    </div>
+    <div class="card-body">
+        <app-transaction-display [year]="year"></app-transaction-display>
+    </div>
+</div>
+<div class="card w-auto mx-5 my-3 p-2 h-auto">
+    <div class="card-header">
+        Pie Chart ({{ year }})
+    </div>
+    <div class="card-body">
+        <app-pie-chart [year]="year"></app-pie-chart>
+    </div>
+</div>
+<div class="card w-auto mx-5 my-3 p-2 h-auto">
+    <div class="card-header">
+        Bar Chart ({{ year }})
+    </div>
+    <div class="card-body">
+        <app-bar-chart [year]="year"></app-bar-chart>
+    </div>
+</div>

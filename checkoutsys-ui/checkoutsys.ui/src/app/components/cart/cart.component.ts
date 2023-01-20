@@ -64,6 +64,10 @@ export class CartComponent implements OnInit {
     this.formModal.show();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   getRowIndex(btn: HTMLButtonElement) {
     let tabIndex: number = <number>btn.closest('tr')?.rowIndex;
     var currRow = this.productLst[tabIndex];

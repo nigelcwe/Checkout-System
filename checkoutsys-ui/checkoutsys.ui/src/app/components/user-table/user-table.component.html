@@ -1,19 +1,25 @@
-<table>
+<table class="text-center">
     <thead>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th>Role</th>
+      <th class="col-1">Id</th>
+      <th></th>
+      <th class="col-3">Name</th>
+      <th></th>
+      <th class="col-3">Username</th>
+      <th></th>
+      <th class="col-4">Email</th>
+      <th></th>
+      <th class="col-1">Role</th>
     </thead>
     <tbody>
       <tr *ngFor="let user of userLst">
         <td>{{ user.id }}</td>
+        <td>|</td>
         <td>{{ user.name }}</td>
+        <td>|</td>
         <td>{{ user.username }}</td>
+        <td>|</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.password }}</td>
+        <td>|</td>
         <td>{{ user.role }}</td>
       </tr>
     </tbody>
